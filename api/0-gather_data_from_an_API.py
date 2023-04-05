@@ -29,7 +29,6 @@ if __name__ == '__main__':
             if employee_todo.get('completed') is True:
                 NUMBER_OF_DONE_TASKS += 1
                 TASK_TITLE.append(todo['title'])
-                print(TASK_TITLE)
             TOTAL_NUMBER_OF_TASKS += 1
 
     print(f"Employee {EMPLOYEE_NAME} is done "
