@@ -33,6 +33,6 @@ if __name__ == '__main__':
             TOTAL_NUMBER_OF_TASKS += 1
 
     print(f"Employee {EMPLOYEE_NAME} is done "
-          f"with tasks({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASKS})")
+          f"with tasks({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASKS}):")
     for task in TASK_TITLE:
         print(f"\t {task}")
