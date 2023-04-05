@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-Using what you did in the task #0,
-extend your Python script to export data
-in the JSON format.
+uses an API and for a given employee ID,
+returns information about his/her TODO list progress.
+export data in the JSON format.
 """
 import json
 import requests
@@ -10,23 +10,25 @@ import sys
 
 
 if __name__ == '__main__':
-    """API"""
-    """ EXTRACT USER DATA """
-    emp_id = sys.argv[1]
-    emp_url = "https://jsonplaceholder.typicode.com/users/{}".format(emp_id)
-    extract_employee = requests.get(emp_url).json()
+    url = 'https://jsonplaceholder.typicode.com'
 
-    """ FORMAT """
-    EMPLOYEE_USERNAME = extract_employee.get('username')
+    USER_ID = sys.argv[1]
+    url_id = f'{url}/users/{USER_ID}'
+    api_response_employee = requests.get(url_id)
+    employee_json = api_response_employee.json()
+    USERNAME = employee_json.get('username')
 
-    """ EXTRACT TASK """
-    task_url = 'https://jsonplaceholder.typicode.com/todos?userId={}'.format(
-        emp_id)
-    extract_task = requests.get(task_url).json()
+    url_tasks = f'{url}/todos?userId={USER_ID}'
+    api_response_tasks = requests.get(url_tasks)
+    task_json = api_response_tasks.json()
 
-    with open("{}.json".format(emp_id), "w") as user_id:
-        json.dump({emp_id: [{
-                'task': i.get('title'),
-                'completed': i.get('completed'),
-                'username': EMPLOYEE_USERNAME
-            } for i in extract_task]}, user_id)
+    tasks = []
+    for task in task_json:
+        dict_tasks = {"task": task.get('title'),
+                      "completed": task.get('completed'), "username": USERNAME}
+        tasks.append(dict_tasks)
+
+    all_tasks = {USER_ID: tasks}
+
+    with open(f'{USER_ID}.json', 'w') as json_file:
+        json.dump(all_tasks, json_file)

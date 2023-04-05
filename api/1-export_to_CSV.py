@@ -27,4 +27,3 @@ if __name__ == '__main__':
         for task in task_json:
                 writer.writerow([USER_ID, USERNAME,
                                  task.get('completed'), task.get('title')])
-
