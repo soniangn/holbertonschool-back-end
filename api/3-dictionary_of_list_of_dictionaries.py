@@ -16,14 +16,14 @@ if __name__ == '__main__':
     id_json = api_response_id.json()
 
     employees_tasks = {}
-    employee_dict = []
+    
     for person in id_json:
         id = person.get('id')
         username = person.get('username')
         url_tasks = f'{url}/todos?userId={id}'
         api_response_tasks = requests.get(url_tasks)
         tasks_json = api_response_tasks.json()
-    
+        employee_dict = []
         for task in tasks_json:
             employee_tasks = {"username": username,
                               "task": task.get('title'),
