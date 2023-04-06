@@ -16,7 +16,7 @@ if __name__ == '__main__':
     id_json = api_response_id.json()
 
     employees_tasks = {}
-    
+
     for person in id_json:
         id = person.get('id')
         username = person.get('username')
